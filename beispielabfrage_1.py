@@ -1,3 +1,4 @@
+***
 -- ACTUAL QUERIES TO TEST AT OTHER DATABASE
 SELECT DATA_SOURCE, ADDRESS, 
         COUNT(*), AVG(VALUE),
@@ -6,6 +7,7 @@ SELECT DATA_SOURCE, ADDRESS,
 FROM MEASUREMENTS
 WHERE TIMESTAMP BETWEEN '2020-03-01 00:00:00' AND '2020-03-31 00:00'
 GROUP BY DATA_SOURCE, ADDRESS;
+***
 
 
 from datetime import datetime
@@ -13,11 +15,11 @@ from pymongo import MongoClient
 import pprint
 from pymongo.server_api import ServerApi
 
-# 连接到本地 MongoDB
+# Verbindung MongoDB
 uri = "mongodb://root:password@localhost:27017/sensors_db?authSource=admin"
 client = MongoClient(uri, server_api=ServerApi('1'))
 db = client["sensors_db"]
-collection = db['measurements']   # 集合名
+collection = db['measurements']   # Collection Name
 
 # 定义时间范围 (2020年3月)
 start_date = datetime(2020, 3, 1, 0, 0, 0)
@@ -35,16 +37,17 @@ pipeline = [
         }
     },
 
-    # 步骤2: 分组统计=Group by
+    # Schritte 2: Gruppierung und Statistik
     {
+        # Gruppieren nach Datenquelle und Adresse
         "$group": {
             "_id": {
                 "data_source": "$data_source",
                 "address": "$address"
             },
-            "count": {"$sum": 1},  # 计算总数
-            "avg_value": {"$avg": "$value"},  # 计算平均值
-            "values": {"$push": "$value"}  # 收集所有值用于计算百分位数
+            "count": {"$sum": 1},  # Zähle die Anzahl der Dokumente in jeder Gruppe
+            "avg_value": {"$avg": "$value"},  # Berechne den Durchschnittswert der Werte in jeder Gruppe
+            "values": {"$push": "$value"}  # Sammle alle Werte in einer Liste für Berechnung später
         }
     },
 
