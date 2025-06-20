@@ -1,11 +1,11 @@
 
 # Vergleich von Datenbanken PostgreSQL und MongoDB
 
-##chapter 2: Technischer Vergleich 
- Author：Maurice Koppenhagen
+## chapter 2: Technischer Vergleich 
+Author：Maurice Koppenhagen
 
 
-##chapter 3: Umsetzung & Abfragebeispiele
+## chapter 3: Umsetzung & Abfragebeispiele
 Authorin：Yiling Li
 
 Öffnen Sie die folgenden Dateien in PyCharm oder Ihrer bevorzugten Entwicklungsumgebung:
@@ -15,7 +15,7 @@ Authorin：Yiling Li
 
 
 
-##chapter 4: Performancevergleich & Test
+## chapter 4: Performancevergleich & Test
 Author：Mirza Ibadzade
 
 Öffnen Sie die folgenden Dateien :
